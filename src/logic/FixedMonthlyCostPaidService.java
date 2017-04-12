@@ -5,7 +5,6 @@ public class FixedMonthlyCostPaidService extends PaidService{
     private String id;
     private String name;
     private double costs;
-    private int monthlyCosts;
 
     public FixedMonthlyCostPaidService(String id, String name, double costs) {
         this.id = id;
@@ -15,8 +14,7 @@ public class FixedMonthlyCostPaidService extends PaidService{
 
     @Override
     public int calculateAverageMonthlyCosts() {
-        monthlyCosts = (int)costs;
-        return monthlyCosts;
+        return (int)Math.ceil(costs);
     }
 
     @Override
