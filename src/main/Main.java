@@ -9,7 +9,6 @@ import java.util.Comparator;
 
 
 public class Main{
-
     private static PaidService[] elements = new PaidService[]{
             new FixedHourlyCostPaidService("service1", "Google Orkut", 11),
             new FixedHourlyCostPaidService("service2", "Google Voice", 9.4),
@@ -21,21 +20,21 @@ public class Main{
     };
 
 
-    public static void arraySorting(){
-        //сортировка массива по убыванию среднемесячных затрат
+    private static void arraySorting(){
+        //Сортировка массива по убыванию среднемесячных затрат.
        Arrays.sort(elements, new Comparator<PaidService>() {
            @Override
            public int compare(PaidService o1, PaidService o2) {
                if (o1.calculateAverageMonthlyCosts() < o2.calculateAverageMonthlyCosts()){
-                   return 1;}
-               else if (o1.calculateAverageMonthlyCosts() > o2.calculateAverageMonthlyCosts()){
-                   return -1;}
-               else {
+                   return 1;
+               } else if (o1.calculateAverageMonthlyCosts() > o2.calculateAverageMonthlyCosts()){
+                   return -1;
+               } else {
                    return 0;
                }
            }
        });
-       //упорядочивание данных по названию сервиса, когда сумма затрат совпадает
+       //Упорядочивание данных по названию сервиса, когда сумма затрат совпадает.
        for(int i = 0; i < elements.length; i++){
            if (i == elements.length - 1){
                break;
@@ -50,27 +49,54 @@ public class Main{
        }
     }
 
-    public static void allDataOutput(){
-        //вывод содержания отсортированного массива на экран
+
+    private static void allDataOutput(){
+        /*Вывод содержания отсортированного массива на экран, которое включает в себя
+         * значения полей id, name и среднемесянче затраты.
+         */
         for (PaidService cur: elements){
             System.out.println(cur.toString());
         }
     }
 
-    public static void namesOutput(){
+
+    private static void namesOutput(){
+        //Вывод первых 5 значений свойства name элементов из упорядоченного массива.
         for (int i = 0; i < 5; i++){
             System.out.println(elements[i].getName());
         }
     }
 
-    public static void idOutput(){
-        PaidService[] last3Ids = new PaidService[3];
-        for (int i = 0, j = elements.length - 1; i < last3Ids.length; i++, j--){
-            last3Ids[i] = elements[j];
+
+    private static void idOutput(){
+        //Вывод последних трех значений свойства id элементов из упорядоченного массива.
+        for (int i = elements.length - 3; i <= elements.length - 1; i++){
+            System.out.println(elements[i].getId());
+        }
+    }
+
+
+    private static void compareTwoServices(){
+        /*
+         * Сравнение ежемесячных затрат на сервисы Youtube и Mandrill. Для удобства объекты, у которых значения
+         * полей name соответствуют указанным, заносятся в отдельный массив.
+         */
+        PaidService[] services = new PaidService[2];
+        for (int i = 0, j = 0; i < elements.length; i++){
+            if (elements[i].getName().equals("Mandrill") || elements[i].getName().equals("Youtube")){
+                services[j] = elements[i];
+                j++;
+            }
         }
 
-        for (int i = last3Ids.length - 1; i >= 0; i--){
-            System.out.println(last3Ids[i].getId());
+        if (services[0].calculateAverageMonthlyCosts() > services[1].calculateAverageMonthlyCosts()){
+            System.out.println(services[0].getName());
+            System.out.println(services[1].getName());
+        }else if (services[0].calculateAverageMonthlyCosts() == services[1].calculateAverageMonthlyCosts()){
+            System.out.println(services[0].getName() + " / " + services[1].getName());
+        }else {
+            System.out.println(services[1].getName());
+            System.out.println(services[0].getName());
         }
     }
 
@@ -82,5 +108,7 @@ public class Main{
         namesOutput();
         System.out.println();
         idOutput();
+        System.out.println();
+        compareTwoServices();
     }
 }
