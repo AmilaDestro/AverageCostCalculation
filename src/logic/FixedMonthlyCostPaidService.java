@@ -1,7 +1,7 @@
 package logic;
 
 
-public class FixedMonthlyCostPaidService extends PaidService{
+public class FixedMonthlyCostPaidService extends PaidService {
     private String id;
     private String name;
     private double costs;
@@ -14,7 +14,7 @@ public class FixedMonthlyCostPaidService extends PaidService{
 
     @Override
     public int calculateAverageMonthlyCosts() {
-        return (int)Math.ceil(costs);
+        return (int) Math.ceil(costs);
     }
 
     @Override
