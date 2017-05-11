@@ -14,7 +14,7 @@ public class FixedHourlyCostPaidService extends PaidService {
 
     @Override
     public int calculateAverageMonthlyCosts() {
-        return  (int) Math.ceil(30 * 24 * costs);
+        return (int) Math.ceil(30 * 24 * costs);
     }
 
     @Override
